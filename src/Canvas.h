@@ -1,6 +1,6 @@
 #pragma once
 #include "common.h"
-
+#include "Fractal.h"
 
 struct color {
 	float r, g, b;
@@ -18,6 +18,7 @@ private:
 	static void preDisplay();
 	static void postDisplay();
 	static void keyInput(unsigned char key, int x, int y);
+	static void idleFunc(void);
 	static void displayCanvas(void);
 	static void drawScreen();
 	static color backgroundColor;
