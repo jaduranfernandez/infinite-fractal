@@ -24,11 +24,11 @@ complex<double> Fractal::fromPixelToComplex(int x, int y, int windowWidth, int w
 	return complex<double>(realValue, imaValue);
 }
 
-void Fractal::init(int width, int height) {
-	left = centerX - xSize / 2;
-	right = centerX + xSize / 2;
-	up = centerY - ySize / 2;
-	down = centerY + ySize / 2;
+void Fractal::init(int width, int height, float zoom) {
+	left = (centerX - xSize / 2) + zoom;
+	right = (centerX + xSize / 2) - zoom;
+	up = (centerY - ySize / 2) + zoom;
+	down = (centerY + ySize / 2) - zoom;
 	xRangeChanger = ((right - left) / (width - 0));
 	yRangeChanger = ((down - up) / (height - 0));
 }

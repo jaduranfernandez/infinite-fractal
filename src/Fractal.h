@@ -10,7 +10,7 @@ private:
 	static float left, right, up, down;
 public:
 	static float centerX, centerY;
-	static void init(int width, int height);
+	static void init(int width, int height, float zoom);
 	static int maxIterations;
 	static float tolerance;
 	static float calculateIntensity(int x, int y, int windowWidth, int windowHeight);

@@ -22,7 +22,8 @@ private:
 	static void displayCanvas(void);
 	static void drawScreen();
 	static color backgroundColor;
-
+	static float zoom;
+	static bool isChanged;
 public:
 	Canvas(){};
 	static color testColor;

@@ -16,7 +16,7 @@ void Canvas::preDisplay() {
 	gluOrtho2D(0.0, windowWidth, 0.0, windowHeight);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_POINTS);
-	Fractal::init(windowWidth, windowHeight);
+	Fractal::init(windowWidth, windowHeight, zoom);
 }
 
 
@@ -48,7 +48,14 @@ void Canvas::init(int* argcp, char** argv) {
 
 
 void Canvas::idleFunc(void) {
-
+	if (isChanged) {
+		for (int y = 0; y < windowHeight; y += pixelSize) {
+			for (int x = 0; x < windowWidth; x += pixelSize) {
+				float intensity = Fractal::calculateIntensity(x, y, windowWidth, windowHeight);
+				pixels[matrixIndex(x, y, windowWidth)] = color(intensity * testColor.r, intensity * testColor.g, intensity * testColor.b);
+			}
+		}
+	}
 	glutSetWindow(windowId);
 	glutPostRedisplay();
 }
@@ -60,8 +67,11 @@ void Canvas::mainLoop() {
 
 
 void Canvas::displayCanvas(void){
-	preDisplay();
-	drawScreen();	
+	if (isChanged) {
+		preDisplay();
+		drawScreen();
+	}
+	
 	postDisplay();
 }
 
@@ -69,15 +79,9 @@ void Canvas::displayCanvas(void){
 void Canvas::drawScreen() {
 	for (int y = 0; y < windowHeight; y += pixelSize) {
 		for (int x = 0; x < windowWidth; x += pixelSize) {
-			float intensity = Fractal::calculateIntensity(x, y, windowWidth, windowHeight);
-			//cout << intensity << "\n";
-
-			drawPixel(x, y, color(intensity * testColor.r, intensity * testColor.g, intensity * testColor.b));
+			drawPixel(x, y);
 		}
-	}
-
-
-	
+	}	
 }
 
 void Canvas::drawPixel(int x, int y) {
@@ -89,28 +93,56 @@ void Canvas::drawPixel(int x, int y) {
 
 void Canvas::drawPixel(int x, int y, color c) {
 	glColor3f(c.r, c.g, c.b);
-	//glColor3f(0.7f, 1.0f, 1.0f);
 	glVertex2f(x, y);
 }
 
 
 void Canvas::keyInput(unsigned char key, int x, int y){
 	switch (key){
+	case 'w':
+		Fractal::centerY += 0.01;
+		break;
+	case 's':
+		Fractal::centerY -= 0.01;
+		break;
+	case 'a':
+		Fractal::centerX -= 0.01;
+		break;
+	case 'd':
+		Fractal::centerX += 0.01;
+		break;
+
 	case 'c':
-		cout << "Change color \n";
 		float aux;
 		aux = testColor.r;
 		testColor.r = testColor.b;
 		testColor.b = aux;
 		break;
+
+	case 'q':
+		zoom += 0.01f;
+		cout << "Zoom\n";
+
+		break;
+
+	case 'e':
+		zoom -= 0.01f;
+
+		break;
+
 	case 32:	//	Spacebar
-		pixelSize -= 1;
+		if(pixelSize > 1)
+			pixelSize = 1;
+		else
+			pixelSize = 10;
 		break;
 	case 27:	//	Escape
 		exit(0);
 		break;
 
 	}
+	cout << "Tecla pulsada\n";
+	isChanged = true;
 }
 
 
@@ -122,4 +154,6 @@ color* Canvas::pixels = nullptr;
 int Canvas::windowWidth = 512;
 int Canvas::windowHeight = 512;
 color Canvas::backgroundColor = color(0,0,0);
-color Canvas::testColor = color(0.7f, 1.0f, 1.0f);
+color Canvas::testColor = color(0.7f, 1.0f, 1.5f);
+float Canvas::zoom = 0.0f;
+bool Canvas::isChanged = true;
