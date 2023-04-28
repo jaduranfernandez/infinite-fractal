@@ -49,12 +49,14 @@ void Canvas::init(int* argcp, char** argv) {
 
 void Canvas::idleFunc(void) {
 	if (isChanged) {
+		cout << "Start calculating\n";
 		for (int y = 0; y < windowHeight; y += pixelSize) {
 			for (int x = 0; x < windowWidth; x += pixelSize) {
 				float intensity = Fractal::calculateIntensity(x, y, windowWidth, windowHeight);
 				pixels[matrixIndex(x, y, windowWidth)] = color(intensity * testColor.r, intensity * testColor.g, intensity * testColor.b);
 			}
 		}
+		cout << "Finished calculating\n";
 	}
 	glutSetWindow(windowId);
 	glutPostRedisplay();
@@ -121,7 +123,6 @@ void Canvas::keyInput(unsigned char key, int x, int y){
 
 	case 'q':
 		zoom += 0.01f;
-		cout << "Zoom\n";
 
 		break;
 
@@ -141,7 +142,6 @@ void Canvas::keyInput(unsigned char key, int x, int y){
 		break;
 
 	}
-	cout << "Tecla pulsada\n";
 	isChanged = true;
 }
 
@@ -149,7 +149,7 @@ void Canvas::keyInput(unsigned char key, int x, int y){
 
 
 int Canvas::windowId = 0;
-float Canvas::pixelSize = 10.0f;
+float Canvas::pixelSize = 1.0f;
 color* Canvas::pixels = nullptr;
 int Canvas::windowWidth = 512;
 int Canvas::windowHeight = 512;

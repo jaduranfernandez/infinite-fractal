@@ -13,9 +13,6 @@
     <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\solver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Fractal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -24,11 +21,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\solver.h">
+    <ClInclude Include="..\src\common.h" />
+    <ClInclude Include="..\src\Canvas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\common.h" />
-    <ClInclude Include="..\src\Fractal.h" />
-    <ClInclude Include="..\src\Canvas.h" />
+    <ClInclude Include="..\src\Fractal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

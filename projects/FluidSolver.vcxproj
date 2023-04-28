@@ -13,11 +13,9 @@
   <ItemGroup>
     <ClCompile Include="..\src\Canvas.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\solver.cpp" />
     <ClCompile Include="..\src\Fractal.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\solver.h" />
     <ClInclude Include="..\src\Canvas.h" />
     <ClInclude Include="..\src\common.h" />
     <ClInclude Include="..\src\Fractal.h" />
