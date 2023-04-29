@@ -6,6 +6,7 @@ InputManager::InputManager() {
         keyState[charValue] = false;
     }
     keyState[32] = false;   //  Space
+    keyState[SDLK_ESCAPE] = false;   //  Escape
 }
 
 

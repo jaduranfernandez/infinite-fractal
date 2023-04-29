@@ -1,5 +1,7 @@
 #pragma once
 #include <complex>
+#include "Color.h"
+
 using namespace std;
 
 class Fractal {
@@ -16,6 +18,7 @@ public:
 	int maxIterations;
 	float tolerance;
 	float calculateIntensity(int x, int y, int windowWidth, int windowHeight);
+	void calculateColors(Color* color, int width, int height);
 };
 
 float linearInterpolation(float value_a, float left_a, float right_a, float left_b, float right_b);

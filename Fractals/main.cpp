@@ -10,25 +10,16 @@ int mainAlt();
 
 
 int main(int argc, char** argv) {
-    int width = 640;
-    int height = 480;
+    int width = 500;
+    int height = 500;
     Canvas screen(width, height);  
     InputManager input;
     Fractal fractal;
     fractal.init(width, height, 0);
-    bool changed = false;
-    SDL_Event event;
-    while (!input.isPressed(SDLK_q)) {
+    while (!input.isPressed(SDLK_ESCAPE)) {
         input.update();
         if (input.isPressed(SDLK_SPACE)) {
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    float intensity = fractal.calculateIntensity(x, y, width, height);
-                    Color color = Color(0, 0, 255);
-                    screen.drawPixel(x, y, Color(255 * intensity, 0, 0));                    
-                }
-            }
-            changed = !changed;
+            fractal.calculateColors(screen.colors,width, height);
         }        
         screen.update();
     }

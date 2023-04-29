@@ -16,8 +16,6 @@ complex<double> Fractal::getNextCoordinate(complex<double> z_n, complex<double> 
 }
 
 complex<double> Fractal::fromPixelToComplex(int x, int y, int windowWidth, int windowHeight) {
-	/*float realValue = linearInterpolation(x, 0, windowWidth, left, right);
-	float imaValue = linearInterpolation(y, 0, windowHeight, up, down);*/
 	float realValue = linearInterpolation(x, 0, left, xRangeChanger);
 	float imaValue = linearInterpolation(y, 0, up, yRangeChanger);
 	return complex<double>(realValue, imaValue);
@@ -62,4 +60,14 @@ float Fractal::calculateIntensity(int x, int y, int windowWidth, int windowHeigh
 		currentIteration++;
 	}
 	return currentIteration / (float)maxIterations;
+}
+
+
+void Fractal::calculateColors(Color* colors, int width, int height) {
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			float intensity = calculateIntensity(x, y, width, height);
+			colors[y * width + x] = Color(102 * intensity, 255 * intensity, 255 * intensity);
+		}
+	}
 }
