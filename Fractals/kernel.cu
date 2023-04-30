@@ -18,11 +18,7 @@ __global__ void colorTest(Fractal fractal, Color* colors, int width, int height)
     if (row > height - 1 || col > width - 1) return;
 
 
-    //printf("(%i,%i) \n", row, col);
-    //colors[row * width + col] = Color(0, 0, 255);
-
     int currentIteration = 0;
-    //  (y, 0, windowHeight, up, down)
     float real  = fractal.left + (((fractal.right - fractal.left) / (width)) * (col));
     float image = fractal.up + (((fractal.down - fractal.up) / (height)) * (row));
     thrust::complex<double> point(real,image);

@@ -7,6 +7,8 @@ InputManager::InputManager() {
     }
     keyState[32] = false;   //  Space
     keyState[SDLK_ESCAPE] = false;   //  Escape
+    keyState[SDLK_UP] = false;   //  Up arrow
+    keyState[SDLK_DOWN] = false;   //  Down arrow
 }
 
 

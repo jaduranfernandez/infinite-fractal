@@ -9,6 +9,12 @@ Canvas::Canvas(int width, int height) {
     surface = SDL_GetWindowSurface(window);
     pixels = (Uint32*)surface->pixels;
     colors = (Color*)malloc(windowWidth * windowHeight * sizeof(Color));
+    zoom = 0.0f;
+    renderMethod = RenderMethod::CPU;
+}
+
+Canvas::Canvas(int width, int height, RenderMethod renderMethod):Canvas(width,height) {
+    this->renderMethod = renderMethod;
 }
 
 
@@ -36,6 +42,23 @@ void Canvas::update() {
     }
     SDL_UpdateWindowSurface(window);
 }
+
+
+void Canvas::render(Fractal &fractal) {
+    fractal.init(this->windowWidth, this->windowHeight, this->zoom);
+    switch (renderMethod){
+    case RenderMethod::CPU:
+        fractal.calculateColors(this->colors, this->windowWidth, this->windowHeight);
+        break;
+    case RenderMethod::GPU:
+        parallelFractal(fractal, this->colors, this->windowWidth, this->windowHeight);
+        break;
+    default:
+        break;
+    }
+}
+
+
 
 void Canvas::exit() {
     SDL_DestroyWindow(window);
