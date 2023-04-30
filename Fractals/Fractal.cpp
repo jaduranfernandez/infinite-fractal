@@ -35,6 +35,7 @@ Fractal::Fractal() {
 	down = -1.0f;
 	xRangeChanger = 0.0f;
 	yRangeChanger = 0.0f;
+	color = Color(102, 255, 255);
 }
 
 void Fractal::init(int width, int height, float zoom) {
@@ -67,7 +68,9 @@ void Fractal::calculateColors(Color* colors, int width, int height) {
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
 			float intensity = calculateIntensity(x, y, width, height);
-			colors[y * width + x] = Color(102 * intensity, 255 * intensity, 255 * intensity);
+			//colors[y * width + x] = Color(102 * intensity, 255 * intensity, 255 * intensity);
+			Color c = color.applyIntensity(intensity);
+			colors[y * width + x] = c;
 		}
 	}
 }

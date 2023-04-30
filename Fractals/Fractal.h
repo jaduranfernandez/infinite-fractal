@@ -10,8 +10,9 @@ private:
 	complex<double> fromPixelToComplex(int x, int y, int windowWidth, int windowHeight);
 	float xRangeChanger, yRangeChanger;
 	float xSize, ySize;
-	float left, right, up, down;
 public:
+	Color color;
+	float left, right, up, down;
 	float centerX, centerY;
 	Fractal();
 	void init(int width, int height, float zoom);
