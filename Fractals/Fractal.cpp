@@ -35,7 +35,9 @@ Fractal::Fractal() {
 	down = -1.0f;
 	xRangeChanger = 0.0f;
 	yRangeChanger = 0.0f;
-	color = Color(102, 255, 255);
+	//color = Color(102, 255, 255);
+	color = Color(0, 0, 255);
+	altColor = Color(255, 0, 0);
 }
 
 void Fractal::init(int width, int height, float zoom) {
@@ -68,8 +70,14 @@ void Fractal::calculateColors(Color* colors, int width, int height) {
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
 			float intensity = calculateIntensity(x, y, width, height);
-			//colors[y * width + x] = Color(102 * intensity, 255 * intensity, 255 * intensity);
-			Color c = color.applyIntensity(intensity);
+			Color c;
+
+			//c = color.applyIntensity(intensity);
+			
+			//	Color Lerping
+			c.r = this->color.r + (this->altColor.r - this->color.r) * intensity;
+			c.g = this->color.g + (this->altColor.g - this->color.g) * intensity;
+			c.b = this->color.b + (this->altColor.b - this->color.b) * intensity;
 			colors[y * width + x] = c;
 		}
 	}

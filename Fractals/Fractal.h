@@ -12,6 +12,7 @@ private:
 	float xSize, ySize;
 public:
 	Color color;
+	Color altColor;
 	float left, right, up, down;
 	float centerX, centerY;
 	Fractal();
