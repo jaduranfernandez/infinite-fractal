@@ -6,7 +6,6 @@
 using namespace std;
 
 
-void parallelFractalTest(Color* colors, int width, int height);
 
 
 int main(int argc, char** argv) {
